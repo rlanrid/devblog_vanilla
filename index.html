@@ -9,19 +9,51 @@
 </head>
 
 <body>
-  <aside class="aside">
-    <header class="header">
-      <h2 class="name">WJ's blog</h2>
-      <img src="" alt="" class="profile">
-      <p class="desc">Hi, my name is Woojoo Kim. </p>
-      <ul class="links">
-        <li class="link">Github</li>
-        <li class="link">Jobkorea</li>
-        <li class="link">Saramin</li>
-        <li class="link">X</li>
-      </ul>
-    </header>
-    <nav class="nav"></nav>
+  <aside class="sidebar">
+    <div class="sidebar__inner">
+      <header class="sidebar__header">
+        <h1 class="sidebar__logo">WJ's blog</h1>
+        <div class="sidebar__profile">
+          <img src="/profile.jpg" alt="프로필 이미지" class="profile">
+        </div>
+        <p class="sidebar__bio">Hi, my name is Woojoo Kim. </p>
+        <ul class="social">
+          <li class="social__item Github">
+            <a href="">
+              <img src="" alt="Github" class="social__img">
+            </a>
+          </li>
+          <li class="social__item Jobkorea">
+            <a href="">
+              <img src="" alt="Jobkorea" class="social__img">
+            </a>
+          </li>
+          <li class="social__item Saramin">
+            <a href="">
+              <img src="" alt="Saramin" class="social__img">
+            </a>
+          </li>
+          <li class="social__item X">
+            <a href="">
+              <img src="" alt="X" class="social__img">
+            </a>
+          </li>
+        </ul>
+      </header>
+
+      <hr class="line">
+
+      <nav class="nav">
+        <ul class="menu">
+          <li class="menu__item">Home</li>
+          <li class="menu__item">My Posts</li>
+          <li class="menu__item">About me</li>
+        </ul>
+        <button class="btn">
+          <a href="">Post</a>
+        </button>
+      </nav>
+    </div>
   </aside>
   <div class="wrap">
     <header class="header"></header>

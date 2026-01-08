@@ -33,12 +33,90 @@ body {
   display: flex;
 }
 
-.aside {
+/* 사이드바 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 300px;
   height: 100vh;
-  background-color: #17007b;
+  background-color: #2D3447;
 }
 
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  height: 100%;
+  padding: 30px 25px;
+}
+
+.sidebar__header>* {
+  margin-bottom: 25px;
+}
+
+.sidebar__logo {
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+.sidebar__profile {
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.social__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.line {
+  margin-bottom: 25px;
+}
+
+.menu__item {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.menu__item:hover {
+  background-color: #ffffff50;
+  transition-duration: 0.2s;
+}
+
+.btn {
+  display: inline-block;
+  min-width: 150px;
+  padding: 12px 24px;
+  margin-top: 25px;
+  background-color: rgba(106, 106, 106, 0.365);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: rgba(145, 145, 145, 0.365);
+  transition-duration: 0.2s;
+}
+
+/* 본문 */
 .wrap {
   height: 100vh;
   flex: 1;
