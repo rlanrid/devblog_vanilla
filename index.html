@@ -47,16 +47,26 @@
         <ul class="menu">
           <li class="menu__item">Home</li>
           <li class="menu__item">My Posts</li>
-          <li class="menu__item">About me</li>
+          <li class="menu__item">Setting</li>
         </ul>
-        <button class="btn">
-          <a href="">Post</a>
-        </button>
+        <a href="" class="btn">Post</a>
       </nav>
     </div>
   </aside>
   <div class="wrap">
-    <header class="header"></header>
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__intro">
+          <h1 class="header__logo">DevBlog - A Blog For Developers</h1>
+          <p class="header__subtitle">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</p>
+        </div>
+
+        <form class="header__search" action="/search" method="">
+          <label for="header__input">검색어 입력</label>
+          <input type="search" id="header__input" class="header__input" placeholder="Search..." name="search">
+        </form>
+      </div>
+    </header>
     <main class="main"></main>
     <footer class="footer"></footer>
   </div>

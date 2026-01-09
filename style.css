@@ -29,10 +29,6 @@ input {
   cursor: pointer;
 }
 
-body {
-  display: flex;
-}
-
 /* 사이드바 */
 .sidebar {
   position: fixed;
@@ -118,12 +114,20 @@ body {
 
 /* 본문 */
 .wrap {
-  height: 100vh;
-  flex: 1;
+  min-height: 100vh;
+  margin-left: 300px;
 }
 
-.wrap .header {
-  width: 100%;
+.header {
   height: 250px;
   background-color: #ebebeb;
+}
+
+.header__inner {
+
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
