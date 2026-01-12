@@ -256,3 +256,14 @@ body {
   text-overflow: ellipsis;
   line-height: 1.25;
 }
+
+.footer {
+  width: 100%;
+  border-top: 1px solid #666;
+  padding: 20px;
+}
+
+.footer__content {
+  text-align: center;
+  color: #666;
+}
