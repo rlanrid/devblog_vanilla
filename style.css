@@ -144,6 +144,7 @@ body {
   margin-left: 320px;
 }
 
+/* 헤더 */
 .header {
   height: 250px;
   background-color: #FAFAFA;
@@ -184,6 +185,7 @@ body {
   padding: 10px;
 }
 
+/* 메인 */
 .main {}
 
 .post__inner {
@@ -257,6 +259,37 @@ body {
   line-height: 1.25;
 }
 
+.pagination {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination ul {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  border-radius: 4px;
+}
+
+.pagination a:hover {
+  background-color: #333;
+  color: #fff;
+  transition-duration: 0.15s;
+}
+
+.pagination a.active {
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* 푸터 */
 .footer {
   width: 100%;
   border-top: 1px solid #666;
