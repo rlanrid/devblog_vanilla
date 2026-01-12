@@ -73,6 +73,11 @@ body {
   padding: 30px 25px;
 }
 
+.sidebar__header {
+  border-bottom: 1px solid #fff;
+  margin-bottom: 25px;
+}
+
 .sidebar__header>* {
   margin-bottom: 25px;
 }
@@ -105,11 +110,6 @@ body {
   height: 40px;
   border-radius: 50%;
   background-color: black;
-}
-
-.line {
-  height: 0.5px;
-  margin-bottom: 25px;
 }
 
 .menu__item {
