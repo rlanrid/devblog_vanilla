@@ -27,7 +27,7 @@ img {
 
 button,
 input {
-  background-color: none;
+  background-color: transparent;
   border: none;
   outline: none;
 }
@@ -142,7 +142,7 @@ body {
   transition-duration: 0.2s;
 } */
 
-.tag {
+.sidebar__tag-list {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -151,16 +151,20 @@ body {
   border-top: 1px solid #fff;
 }
 
-.tag__item {
+.sidebar__tag-item {
   padding: 5px 8px;
   cursor: pointer;
   background-color: #ffffff20;
   border-radius: 4px;
 }
 
-.tag__item:hover {
+.sidebar__tag-item:hover {
   background-color: #ffffff50;
   transition-duration: 0.2s;
+}
+
+.sidebar__tag-item button {
+  color: #fff;
 }
 
 /* 본문 */
@@ -227,7 +231,6 @@ body {
 
 .post__item {
   display: flex;
-  justify-content: center;
   gap: 20px;
 }
 
@@ -282,6 +285,23 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.25;
+}
+
+.post__tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post__tag-item {
+  display: block;
+  background-color: #8383837a;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.post__tag-item:hover {
+  background-color: #5959597a;
 }
 
 .pagination {

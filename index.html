@@ -16,7 +16,7 @@
         <div class="sidebar__profile">
           <img src="/img/profile.jpg" alt="프로필 이미지" class="profile">
         </div>
-        <p class="sidebar__bio">Hi, my name is Woojoo Kim. </p>
+        <p class="sidebar__bio">Hi, my name is Mike. </p>
         <ul class="social">
           <li class="social__item Github">
             <a href="">
@@ -54,14 +54,14 @@
         </ul>
         <!-- <a href="" class="btn">Post</a> -->
 
-        <ul class="tag">
-          <li class="tag__item">#HTML5</li>
-          <li class="tag__item">#CSS</li>
-          <li class="tag__item">#JavaScript</li>
-          <li class="tag__item">#React</li>
-          <li class="tag__item">#Vue</li>
-          <li class="tag__item">#Jquery</li>
-          <li class="tag__item">#CS</li>
+        <ul class="sidebar__tag-list">
+          <li class="sidebar__tag-item"><button data-tag="html">#HTML5</button></li>
+          <li class="sidebar__tag-item"><button data-tag="css">#CSS</button></li>
+          <li class="sidebar__tag-item"><button data-tag="javascript">#JavaScript</button></li>
+          <li class="sidebar__tag-item"><button data-tag="react">#React</button></li>
+          <li class="sidebar__tag-item"><button data-tag="vue">#Vue</button></li>
+          <li class="sidebar__tag-item"><button data-tag="jqeury">#Jquery</button></li>
+          <li class="sidebar__tag-item"><button data-tag="cs">#CS</button></li>
         </ul>
       </nav>
     </div>
@@ -88,7 +88,35 @@
     <main class="main">
       <div class="post__inner">
         <div class="post__list">
-          <article class="post__item">
+          <!-- <article class="post__item">
+            <div class="post__thumbnail">
+              <img src="/img/JS.png" alt="게시글 썸네일">
+            </div>
+            <div class="post__content">
+              <h2 class="post__title">
+                <a href="/">JavaScript: 기초</a>
+              </h2>
+              <div class="post__info">
+                <span>2개월 전</span>
+                <span class="dot"></span>
+                <span>30 조회수</span>
+                <span class="dot"></span>
+                <span>5 댓글</span>
+              </div>
+              <div class="post__summary">
+                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
+                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다.
+                <div class="post__tags">
+                  <ul class="post__tag-list">
+                    <li class="post__tag-item"><a href="/">#JS</a></li>
+                    <li class="post__tag-item"><a href="/">#SASS</a></li>
+                    <li class="post__tag-item"><a href="/">#React</a></li>
+                    <li class="post__tag-item"><a href="/">#Vue</a></li>
+                  </ul>
+                </div>
+              </div>
+          </article> -->
+          <!-- <article class="post__item">
             <div class="post__thumbnail">
               <img src="/img/JS.png" alt="게시글 썸네일">
             </div>
@@ -187,32 +215,7 @@
                 시작하겠습
               </div>
             </div>
-          </article>
-          <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습
-              </div>
-            </div>
-          </article>
+          </article> -->
         </div>
       </div>
       <!-- 포스트 목록 -->
@@ -242,6 +245,6 @@
   </div>
 </body>
 
-<script src="script.js"></script>
+<script src="/JS/script.js"></script>
 
 </html>
