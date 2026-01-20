@@ -5,7 +5,7 @@ const posts = [
     thumbnail: "../img/JS.png",
     title: "1. JavaScript: 기초",
     info: { date: "2개월 전", view: 10, comment: 15 },
-    summary: "Content contetn coneten",
+    summary: "Content contetn coneten ContenContent contetn conetenContent contetn conetent contetn coneten Content contetn coneten Content contetn coneten Content contetn conetenContent contetn coneten",
     tag: ["css", "javascript", "react"],
     type: "post"
   },
@@ -57,36 +57,50 @@ let state = {
 // 게시글 리스트
 const postList = document.querySelector('.post__list');
 
-// 렌더링
-function renderPosts(state) {
-  postList.innerHTML = '';
-
+// 데이터 가공 함수
+function getDataProcessing(state) {
   // 태그 필터링
-  const filteredPosts = state.activeTag === 'all' ? state.posts : state.posts.filter(post => post.tag.includes(state.activeTag));
+  let result = state.activeTag === 'all' ? state.posts : state.posts.filter(post => post.tag.includes(state.activeTag));
 
   // 정렬
+  if (state.activeSort === "latest") {
+    result.sort((a, b) => b.id - a.id);
+  } else if (state.activeSort === "views") {
+    result.sort((a, b) => b.info.view - a.info.view);
+  }
+
+  return result;
+};
+
+// 정렬 필터 UI 업데이트 함수
+function updateSortButtons(state) {
   const sortButtons = document.querySelectorAll(".post__filtering button");
   sortButtons.forEach((btn) => {
     const isActive = btn.dataset.sort === state.activeSort;
     btn.classList.toggle("is-active", isActive);
     btn.setAttribute("aria-pressed", isActive);
   });
+};
 
-  if (state.activeSort === "latest") {
-    filteredPosts.sort((a, b) => b.id - a.id);
-  } else if (state.activeSort === "views") {
-    filteredPosts.sort((a, b) => b.info.view - a.info.view);
-  }
 
-  console.log(filteredPosts)
+// 렌더링
+function renderPosts(state) {
+  const filteredPosts = getDataProcessing(state);
 
-  filteredPosts.forEach((post) => {
-    const article = document.createElement('article');
-    article.className = 'post__item';
+  updateSortButtons(state);
 
-    const postTags = post.tag.map((tag) => `<li class="post__tag-item"><a href="/">#${tag}</a></li>`).join('');
+  postList.innerHTML = filteredPosts.map(post => createPostTemplate(post)).join('');
+};
 
-    article.innerHTML = `
+// 게시글 템플릿
+function createPostTemplate(post) {
+  const article = document.createElement('article');
+  article.className = 'post__item';
+
+  const postTags = post.tag.map(tag => `<li class="post__tag-item"><a href="/">#${tag}</a></li>`).join('');
+
+  return `
+    <article class="post__item">
       <div class="post__thumbnail">
         <img src="${post.thumbnail}" alt="게시글 썸네일">
       </div>
@@ -110,12 +124,9 @@ function renderPosts(state) {
           </ul>
         </div>
       </div>
-    `;
-
-    postList.appendChild(article);
-  });
+    </article>
+  `;
 };
-
 
 // 태그 이벤트
 const tagButtons = document.querySelectorAll(".sidebar__tag-item button");
