@@ -3,8 +3,8 @@ const posts = [
   {
     id: 1,
     thumbnail: "../img/JS.png",
-    title: "JavaScript: 기초",
-    info: { date: "2개월 전", view: 30, comment: 15 },
+    title: "1. JavaScript: 기초",
+    info: { date: "2개월 전", view: 10, comment: 15 },
     summary: "Content contetn coneten",
     tag: ["css", "javascript", "react"],
     type: "post"
@@ -12,8 +12,8 @@ const posts = [
   {
     id: 2,
     thumbnail: "../img/JS.png",
-    title: "CSS: 기초",
-    info: { date: "2개월 전", view: 30, comment: 15 },
+    title: "2. CSS: 기초",
+    info: { date: "2개월 전", view: 2, comment: 15 },
     summary: "Content contetn coneten",
     tag: ["react"],
     type: "post"
@@ -21,8 +21,8 @@ const posts = [
   {
     id: 3,
     thumbnail: "../img/JS.png",
-    title: "HTML: 기초",
-    info: { date: "2개월 전", view: 30, comment: 15 },
+    title: "3. HTML: 기초",
+    info: { date: "2개월 전", view: 6, comment: 15 },
     summary: "Content contetn coneten",
     tag: ["css", "html", "vue"],
     type: "post"
@@ -30,8 +30,8 @@ const posts = [
   {
     id: 4,
     thumbnail: "../img/JS.png",
-    title: "User",
-    info: { date: "2개월 전", view: 30, comment: 15 },
+    title: "4. User",
+    info: { date: "2개월 전", view: 16, comment: 15 },
     summary: "Hi, my name is Kim",
     tag: ["css", "html", "vue"],
     type: "user"
@@ -39,8 +39,8 @@ const posts = [
   {
     id: 5,
     thumbnail: "../img/JS.png",
-    title: "HTML: 기초",
-    info: { date: "2개월 전", view: 30, comment: 15 },
+    title: "5. HTML: 기초",
+    info: { date: "2개월 전", view: 8, comment: 15 },
     summary: "안녕하세요, Kenny입니다.",
     tag: ["css", "html", "vue"],
     type: "user"
@@ -51,7 +51,7 @@ const posts = [
 let state = {
   posts: posts,
   activeTag: 'all',
-  activeCategory: 'post',
+  activeSort: 'latest'
 }
 
 // 게시글 리스트
@@ -63,6 +63,22 @@ function renderPosts(state) {
 
   // 태그 필터링
   const filteredPosts = state.activeTag === 'all' ? state.posts : state.posts.filter(post => post.tag.includes(state.activeTag));
+
+  // 정렬
+  const sortButtons = document.querySelectorAll(".post__filtering button");
+  sortButtons.forEach((btn) => {
+    const isActive = btn.dataset.sort === state.activeSort;
+    btn.classList.toggle("is-active", isActive);
+    btn.setAttribute("aria-pressed", isActive);
+  });
+
+  if (state.activeSort === "latest") {
+    filteredPosts.sort((a, b) => b.id - a.id);
+  } else if (state.activeSort === "views") {
+    filteredPosts.sort((a, b) => b.info.view - a.info.view);
+  }
+
+  console.log(filteredPosts)
 
   filteredPosts.forEach((post) => {
     const article = document.createElement('article');
@@ -111,14 +127,28 @@ tagButtons.forEach((btn) => {
   });
 });
 
-// 검색 필터 이벤트
-const searchForm = document.querySelector(".header__search");
-const headerSelect = document.querySelector(".header__select");
+// 정렬 이벤트
+const postFilterContainer = document.querySelector(".post__filtering");
 
-searchForm.addEventListener("submit", (e) => {
-  state.activeCategory = headerSelect.value;
-  renderPosts({ posts: state.posts })
+postFilterContainer.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+
+  if (!btn) {
+    return;
+  }
+
+  state.activeSort = e.target.dataset.sort;
+  renderPosts(state);
 });
+
+// 검색 필터 이벤트
+// const searchForm = document.querySelector(".header__search");
+// const headerSelect = document.querySelector(".header__select");
+
+// searchForm.addEventListener("submit", (e) => {
+//   state.activeCategory = headerSelect.value;
+//   renderPosts({ posts: state.posts })
+// });
 
 
 // 실행

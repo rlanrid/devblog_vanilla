@@ -223,6 +223,28 @@ body {
   padding: 50px;
 }
 
+.post__filtering {
+  display: flex;
+  padding: 15px 0;
+}
+
+.post__filtering button {
+  color: #5c5c5c;
+  font-size: 12px;
+}
+
+.post__filtering button.is-active {
+  color: black;
+  font-size: 12px;
+}
+
+.post__filtering button:not(:last-child)::after {
+  content: "|";
+  vertical-align: 1px;
+  padding: 0 5px;
+  color: #000;
+}
+
 .post__list {
   display: flex;
   flex-direction: column;
