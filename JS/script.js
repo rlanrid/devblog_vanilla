@@ -50,17 +50,32 @@ const posts = [
 // 상태
 let state = {
   posts: posts,
-  activeTag: 'all',
-  activeSort: 'latest'
-}
+  activeTag: null,
+  activeSort: 'latest',
+  searchKeyword: '',
+};
 
 // 게시글 리스트
 const postList = document.querySelector('.post__list');
 
 // 데이터 가공 함수
 function getDataProcessing(state) {
+  let result = [...state.posts];
+
   // 태그 필터링
-  let result = state.activeTag === 'all' ? state.posts : state.posts.filter(post => post.tag.includes(state.activeTag));
+  if (state.activeTag !== null) {
+    result = result.filter(post => post.tag.includes(state.activeTag));
+  }
+
+  // 검색
+  if (state.searchKeyword !== "") {
+    const keyword = state.searchKeyword.toLowerCase();
+
+    result = result.filter(post =>
+      post.title.toLowerCase().includes(keyword) ||
+      post.summary.toLowerCase().includes(keyword)
+    );
+  }
 
   // 정렬
   if (state.activeSort === "latest") {
@@ -81,7 +96,6 @@ function updateSortButtons(state) {
     btn.setAttribute("aria-pressed", isActive);
   });
 };
-
 
 // 렌더링
 function renderPosts(state) {
@@ -151,6 +165,26 @@ postFilterContainer.addEventListener("click", (e) => {
   state.activeSort = e.target.dataset.sort;
   renderPosts(state);
 });
+
+// 검색 이벤트
+const searchInput = document.getElementById("header__input");
+const searchButton = document.querySelector(".header__button");
+
+searchInput.addEventListener("input", (e) => {
+  state.searchKeyword = e.target.value.trim();
+  renderPosts(state);
+});
+
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (state.searchKeyword !== "") {
+    renderPosts(state);
+  } else {
+    alert("검색어를 입력해주세요.");
+  }
+});
+
 
 // 검색 필터 이벤트
 // const searchForm = document.querySelector(".header__search");
