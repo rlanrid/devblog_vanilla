@@ -1,3 +1,15 @@
+// 햄버거 메뉴
+const sidebar = document.querySelector(".sidebar");
+const hamburger = document.querySelector(".hamburger");
+const overlay = document.querySelector(".overlay");
+
+hamburger.addEventListener("click", () => {
+  sidebar.classList.toggle("is-open");
+  hamburger.classList.toggle("is-open");
+  overlay.classList.toggle("is-open");
+});
+
+
 // 데이터
 const posts = [
   {

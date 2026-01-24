@@ -61,7 +61,7 @@ body {
   left: 0;
   width: 320px;
   height: 100vh;
-  background-color: #2D3447;
+  transition: transform 0.3s ease;
 }
 
 .sidebar__inner {
@@ -71,6 +71,7 @@ body {
   color: white;
   height: 100%;
   padding: 30px 25px;
+  background-color: #2D3447;
 }
 
 .sidebar__header {
@@ -180,6 +181,7 @@ body {
 }
 
 .header__inner {
+  position: relative;
   height: 250px;
   display: flex;
   align-items: center;
@@ -187,6 +189,67 @@ body {
   flex-direction: column;
   text-align: center;
   gap: 15px;
+}
+
+.header__inner .hamburger {
+  display: none;
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  left: 25px;
+  top: 25px;
+  font-size: 32px;
+  z-index: 1100;
+}
+
+.header__inner .hamburger span {
+  position: absolute;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+.header__inner .hamburger span::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+.header__inner .hamburger span::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+.header__inner .hamburger.is-open span {
+  background-color: transparent;
+}
+
+.header__inner .hamburger.is-open span::before {
+  top: 0;
+  transform: translateX(-50%) rotate(45deg);
+  background-color: #fff;
+}
+
+.header__inner .hamburger.is-open span::after {
+  top: 0;
+  transform: translateX(-50%) rotate(-45deg);
+  background-color: #fff;
 }
 
 .header__logo {
@@ -355,6 +418,25 @@ body {
   color: #fff;
 }
 
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(102, 102, 102, 0);
+  backdrop-filter: blur(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease;
+  z-index: 1050;
+}
+
+.overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(102, 102, 102, 0.3);
+  backdrop-filter: blur(5px);
+}
+
 
 /* 푸터 */
 .footer {
@@ -369,4 +451,21 @@ body {
   font-size: 14px;
 }
 
-@media screen() {}
+@media (max-width: 980px) {
+  .wrap {
+    margin: 0;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 1051;
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .header__inner .hamburger {
+    display: block;
+  }
+}
