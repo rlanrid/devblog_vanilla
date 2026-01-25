@@ -41,6 +41,11 @@ body {
   letter-spacing: -0.02em
 }
 
+body.is-locked {
+  overflow: hidden;
+  touch-action: none;
+}
+
 /* 유틸리티 */
 .sr-only {
   position: absolute;
@@ -467,5 +472,15 @@ body {
 
   .header__inner .hamburger {
     display: block;
+  }
+}
+
+@media (max-width: 760px) {
+  .header__logo {
+    font-size: 24px;
+  }
+
+  .header__subtitle {
+    font-size: 14px;
   }
 }

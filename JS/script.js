@@ -4,11 +4,27 @@ const hamburger = document.querySelector(".hamburger");
 const overlay = document.querySelector(".overlay");
 
 hamburger.addEventListener("click", () => {
-  sidebar.classList.toggle("is-open");
   hamburger.classList.toggle("is-open");
+  sidebar.classList.toggle("is-open");
   overlay.classList.toggle("is-open");
+
+  document.body.classList.toggle("is-locked");
 });
 
+// 스크롤바
+function getScrollbarWidth() {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
+function lockScroll() {
+  const scrollBarWidth = getScrollbarWidth();
+
+  document.body.style.paddingRight = `${scrollBarWidth}px`;
+};
+
+function unlockScroll() {
+  document.body.style.paddingRight = '';
+}
 
 // 데이터
 const posts = [
