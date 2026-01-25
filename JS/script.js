@@ -45,6 +45,16 @@ const posts = [
     tag: ["css", "html", "vue"],
     type: "user"
   },
+
+  {
+    id: 6,
+    thumbnail: "../img/JS.png",
+    title: "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    info: { date: "2개월 전", view: 80, comment: 15 },
+    summary: "안녕하세요, Kenny입니다.",
+    tag: ["css", "html", "vue"],
+    type: "user"
+  },
 ];
 
 // 상태
@@ -91,6 +101,7 @@ function lockScroll() {
 
 function unlockScroll() {
   document.body.style.paddingRight = '';
+  document.body.classList.toggle("is-locked", state.isMenuOpen);
 }
 
 // 게시글 리스트

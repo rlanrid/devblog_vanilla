@@ -483,4 +483,61 @@ body.is-locked {
   .header__subtitle {
     font-size: 14px;
   }
+
+  .post__inner {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__logo {
+    font-size: 20px;
+  }
+
+  .header__subtitle {
+    font-size: 12px;
+  }
+
+  .header__inner .hamburger {
+    left: 18px;
+  }
+
+  .header__inner .hamburger span {
+    width: 20px;
+  }
+
+  .header__inner .hamburger span::before {
+    width: 20px;
+  }
+
+  .header__inner .hamburger span::after {
+    width: 20px;
+  }
+
+  .post__inner {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+  }
+
+  .post__content {
+    min-width: 0;
+  }
+
+  .post__thumbnail {
+    width: 90px;
+    height: 90px;
+  }
+
+  .post__title {
+    font-size: 20px;
+  }
+
+  .post__title a {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
