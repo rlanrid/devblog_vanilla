@@ -1,31 +1,3 @@
-// 햄버거 메뉴
-const sidebar = document.querySelector(".sidebar");
-const hamburger = document.querySelector(".hamburger");
-const overlay = document.querySelector(".overlay");
-
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("is-open");
-  sidebar.classList.toggle("is-open");
-  overlay.classList.toggle("is-open");
-
-  document.body.classList.toggle("is-locked");
-});
-
-// 스크롤바
-function getScrollbarWidth() {
-  return window.innerWidth - document.documentElement.clientWidth;
-};
-
-function lockScroll() {
-  const scrollBarWidth = getScrollbarWidth();
-
-  document.body.style.paddingRight = `${scrollBarWidth}px`;
-};
-
-function unlockScroll() {
-  document.body.style.paddingRight = '';
-}
-
 // 데이터
 const posts = [
   {
@@ -81,7 +53,45 @@ let state = {
   activeTag: null,
   activeSort: 'latest',
   searchKeyword: '',
+  isMenuOpen: false,
 };
+
+// 햄버거 메뉴
+const sidebar = document.querySelector(".sidebar");
+const hamburger = document.querySelector(".hamburger");
+const overlay = document.querySelector(".overlay");
+
+hamburger.addEventListener("click", () => {
+  state.isMenuOpen = !state.isMenuOpen;
+  syncMenuUI();
+});
+
+function syncMenuUI() {
+  hamburger.classList.toggle("is-open", state.isMenuOpen);
+  sidebar.classList.toggle("is-open", state.isMenuOpen);
+  overlay.classList.toggle("is-open", state.isMenuOpen);
+
+  state.isMenuOpen ? lockScroll() : unlockScroll();
+};
+
+// 스크롤바 함수
+function getScrollbarWidth() {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
+function lockScroll() {
+  const scrollBarWidth = getScrollbarWidth();
+
+  if (scrollBarWidth > 0) {
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+  }
+
+  document.body.classList.toggle("is-locked", state.isMenuOpen);
+};
+
+function unlockScroll() {
+  document.body.style.paddingRight = '';
+}
 
 // 게시글 리스트
 const postList = document.querySelector('.post__list');
