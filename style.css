@@ -162,8 +162,6 @@ body.is-locked {
 }
 
 .sidebar__tag-item {
-  padding: 5px 8px;
-  cursor: pointer;
   background-color: #ffffff20;
   border-radius: 4px;
 }
@@ -174,11 +172,15 @@ body.is-locked {
 }
 
 .sidebar__tag-item button {
+  padding: 5px 8px;
+  cursor: pointer;
   color: #fff;
 }
 
 /* 본문 */
 .wrap {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   margin-left: 320px;
 }
@@ -287,11 +289,12 @@ body.is-locked {
 }
 
 /* 메인 */
-.main {}
+.main {
+  flex: 1;
+}
 
 .post__inner {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 50px;
 }
 
@@ -321,6 +324,11 @@ body.is-locked {
   display: flex;
   flex-direction: column;
   gap: 60px;
+}
+
+.post__list>p {
+  margin-top: 50px;
+  text-align: center;
 }
 
 .post__item {

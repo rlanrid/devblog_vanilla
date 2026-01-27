@@ -272,10 +272,58 @@ const posts = [
   }
 ];
 
+// URL 파싱
+function parseURL() {
+  const hash = window.location.hash;
+
+  const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+
+  const params = new URLSearchParams(queryString);
+
+  return {
+    currentPage: Number(params.get("page")) || 1,
+    activeTag: params.get("tag") || "",
+    activeSort: params.get("sort") || "latest",
+    searchKeyword: params.get("keyword") || "",
+  };
+};
+
+function initStateFromURL(state) {
+  const urlState = parseURL();
+
+  state.currentPage = urlState.currentPage;
+  state.activeTag = urlState.activeTag;
+  state.activeSort = urlState.activeSort;
+  state.searchKeyword = urlState.searchKeyword;
+};
+
+function updateURL(partial) {
+  const hash = window.location.hash;
+
+  const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+
+  const params = new URLSearchParams(queryString);
+
+  Object.entries(partial).forEach(([key, value]) => {
+    if (value === null || value === '') {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+  });
+
+  history.pushState({}, '', `#/posts?${params.toString()}`);
+};
+
+function syncFromURL() {
+  initStateFromURL(state);
+  renderPosts(state);
+};
+
 // 상태
 let state = {
   posts: posts,
-  activeTag: null,
+  activeTag: "",
   activeSort: 'latest',
   searchKeyword: '',
   isMenuOpen: false,
@@ -330,9 +378,8 @@ function getDataProcessing(state) {
   let result = [...state.posts];
 
   // 태그 필터링
-  if (state.activeTag !== null) {
+  if (state.activeTag !== "") {
     result = result.filter(post => post.tag.includes(state.activeTag));
-    currentPage = 1;
   }
 
   // 검색
@@ -343,16 +390,13 @@ function getDataProcessing(state) {
       post.title.toLowerCase().includes(keyword) ||
       post.summary.toLowerCase().includes(keyword)
     );
-    currentPage = 1;
   }
 
   // 정렬
   if (state.activeSort === "latest") {
     result.sort((a, b) => b.id - a.id);
-    currentPage = 1;
   } else if (state.activeSort === "views") {
     result.sort((a, b) => b.info.view - a.info.view);
-    currentPage = 1;
   }
 
   return result;
@@ -393,17 +437,16 @@ function renderPosts(state) {
 
   const totalPage = Math.ceil(processedPosts.length / state.pageSize);
 
-  // 현재 페이지 보정 (중요)
-  // if (state.currentPage > totalPage) {
-  //   state.currentPage = totalPage || 1;
-  // }
-
   const pagedPosts = paginate(processedPosts, state.currentPage, state.pageSize);
 
   updateSortButtons(state);
 
-  postList.innerHTML = pagedPosts.map(post => createPostTemplate(post)).join('');
-  pageList.innerHTML = createPageTemplate(state.currentPage, totalPage);
+  if (!pagedPosts.length <= 0) {
+    postList.innerHTML = pagedPosts.map(post => createPostTemplate(post)).join('');
+    pageList.innerHTML = createPageTemplate(state.currentPage, totalPage);
+  } else {
+    postList.innerHTML = `<p>게시글이 없습니다.</p>`;
+  }
 };
 
 // 게시글 템플릿
@@ -464,8 +507,8 @@ const tagButtons = document.querySelectorAll(".sidebar__tag-item button");
 
 tagButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    state.activeTag = btn.dataset.tag;
-    renderPosts(state);
+    updateURL({ tag: btn.dataset.tag, page: 1 });
+    syncFromURL(state);
   });
 });
 
@@ -479,8 +522,8 @@ postFilterContainer.addEventListener("click", (e) => {
     return;
   }
 
-  state.activeSort = e.target.dataset.sort;
-  renderPosts(state);
+  updateURL({ sort: e.target.dataset.sort, page: 1 });
+  syncFromURL(state);
 });
 
 // 검색 이벤트
@@ -488,14 +531,15 @@ const searchInput = document.getElementById("header__input");
 const searchButton = document.querySelector(".header__button");
 
 searchInput.addEventListener("input", (e) => {
-  state.searchKeyword = e.target.value.trim();
-  renderPosts(state);
+  updateURL({ keyword: e.target.value.trim(), page: 1 });
+  syncFromURL(state);
 });
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (state.searchKeyword !== "") {
+    state.currentPage = 1;
     renderPosts(state);
   } else {
     alert("검색어를 입력해주세요.");
@@ -503,9 +547,6 @@ searchButton.addEventListener("click", (e) => {
 });
 
 // 페이지 이벤트
-const prevButton = document.querySelector(".prev");
-const nextButton = document.querySelector(".next");
-
 pageList.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -530,16 +571,13 @@ pageList.addEventListener("click", (e) => {
   renderPosts(state);
 });
 
-// 실행
-document.addEventListener('DOMContentLoaded', () => {
-  renderPosts(state);
+// 윈도우 이벤트
+window.addEventListener('hashchange', () => {
+  syncFromURL();
 });
 
-// 검색 필터 이벤트
-// const searchForm = document.querySelector(".header__search");
-// const headerSelect = document.querySelector(".header__select");
-
-// searchForm.addEventListener("submit", (e) => {
-//   state.activeCategory = headerSelect.value;
-//   renderPosts({ posts: state.posts })
-// });
+// 실행
+document.addEventListener('DOMContentLoaded', () => {
+  initStateFromURL(state);
+  renderPosts(state);
+});
