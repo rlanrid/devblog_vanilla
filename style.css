@@ -59,6 +59,10 @@ body.is-locked {
   border-width: 0;
 }
 
+.disabled {
+  display: none !important;
+}
+
 /* 사이드바 */
 .sidebar {
   position: fixed;
