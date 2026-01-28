@@ -272,6 +272,44 @@ const posts = [
   }
 ];
 
+// 테마
+function initTheme(state) {
+  const theme = getTheme();
+  state.theme = theme;
+  syncThemeUI(theme);
+};
+
+function getTheme() {
+  return window.localStorage.getItem('theme') || 'light';
+};
+
+function setTheme(theme) {
+  window.localStorage.setItem('theme', theme);
+};
+
+function syncThemeUI(theme) {
+  const body = document.body;
+  const toggleBtn = document.getElementById("theme__toggle");
+
+  if (theme === 'dark') {
+    body.classList.add('dark');
+    toggleBtn.textContent = '☀️';
+    toggleBtn.setAttribute('aria-label', 'Switch to light mode');
+  } else {
+    body.classList.remove('dark');
+    toggleBtn.textContent = '🌙';
+    toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+  }
+};
+
+function toggleTheme(state) {
+  const nextTheme = state.theme === 'light' ? 'dark' : 'light';
+
+  state.theme = nextTheme;
+  setTheme(nextTheme);
+  syncThemeUI(nextTheme);
+};
+
 // URL 파싱
 function parseURL() {
   const hash = window.location.hash;
@@ -323,12 +361,13 @@ function syncFromURL() {
 // 상태
 let state = {
   posts: posts,
-  activeTag: "",
+  activeTag: '',
   activeSort: 'latest',
   searchKeyword: '',
   isMenuOpen: false,
   currentPage: 1,
   pageSize: 5,
+  theme: '',
 };
 
 // 햄버거 메뉴
@@ -571,6 +610,13 @@ pageList.addEventListener("click", (e) => {
   renderPosts(state);
 });
 
+// 토글 이벤트
+const themeToggle = document.getElementById("theme__toggle");
+
+themeToggle.addEventListener("click", () => {
+  toggleTheme(state);
+});
+
 // 윈도우 이벤트
 window.addEventListener('hashchange', () => {
   syncFromURL();
@@ -578,6 +624,7 @@ window.addEventListener('hashchange', () => {
 
 // 실행
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme(state);
   initStateFromURL(state);
   renderPosts(state);
 });

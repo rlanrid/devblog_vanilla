@@ -2,6 +2,19 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
 
 
+/* 설정 */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --header-color: #FAFAFA;
+}
+
+body.dark {
+  --bg-color: #151515;
+  --text-color: #eeeeee;
+  --header-color: #121212;
+}
+
 /* 초기화 */
 * {
   margin: 0;
@@ -38,12 +51,18 @@ button {
 
 body {
   font-family: "Pretendard Variable", Pretendard, sans-serif;
-  letter-spacing: -0.02em
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 body.is-locked {
   overflow: hidden;
   touch-action: none;
+}
+
+body.dark {
+  background-color: #111;
 }
 
 /* 유틸리티 */
@@ -126,12 +145,13 @@ body.is-locked {
   margin-bottom: 25px;
 }
 
-.menu__item {
+.menu__item a {
+  display: block;
   padding: 8px 0;
   cursor: pointer;
 }
 
-.menu__item:hover {
+.menu__item a:hover {
   background-color: #ffffff50;
   transition-duration: 0.2s;
 }
@@ -188,7 +208,7 @@ body.is-locked {
 /* 헤더 */
 .header {
   height: 250px;
-  background-color: #FAFAFA;
+  background-color: var(--header-color);
 }
 
 .header__inner {
@@ -218,7 +238,7 @@ body.is-locked {
   left: 50%;
   width: 24px;
   height: 2px;
-  background-color: #000;
+  background-color: var(--text-color);
   transform: translateX(-50%);
   transition: 0.3s;
 }
@@ -230,7 +250,7 @@ body.is-locked {
   left: 50%;
   width: 24px;
   height: 2px;
-  background-color: #000;
+  background-color: var(--text-color);
   transform: translateX(-50%);
   transition: 0.3s;
 }
@@ -242,7 +262,7 @@ body.is-locked {
   left: 50%;
   width: 24px;
   height: 2px;
-  background-color: #000;
+  background-color: var(--text-color);
   transform: translateX(-50%);
   transition: 0.3s;
 }
@@ -278,6 +298,7 @@ body.is-locked {
   border: 1px solid gray;
   padding: 10px;
   border-radius: 3px;
+  color: var(--text-color);
 }
 
 .header__button {
@@ -309,7 +330,7 @@ body.is-locked {
 }
 
 .post__filtering button.is-active {
-  color: black;
+  color: var(--text-color);
   font-size: 12px;
 }
 
@@ -317,7 +338,7 @@ body.is-locked {
   content: "|";
   vertical-align: 1px;
   padding: 0 5px;
-  color: #000;
+  color: var(--text-color);
 }
 
 .post__list {
@@ -474,6 +495,28 @@ body.is-locked {
   font-size: 14px;
 }
 
+/* 테마 토글 */
+.theme__toggle-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--text-color);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s;
+}
+
+.theme__toggle-btn:hover {
+  background-color: var(--text-color);
+}
+
+
+/* 반응형 */
 @media (max-width: 980px) {
   .wrap {
     margin: 0;
