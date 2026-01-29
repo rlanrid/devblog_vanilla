@@ -474,18 +474,14 @@ function goNextPage() {
 function renderPosts(state) {
   const processedPosts = getDataProcessing(state);
 
-  const totalPage = Math.ceil(processedPosts.length / state.pageSize);
+  const totalPage = Math.ceil(processedPosts.length / state.pageSize) || 1;
 
   const pagedPosts = paginate(processedPosts, state.currentPage, state.pageSize);
 
   updateSortButtons(state);
 
-  if (!pagedPosts.length <= 0) {
-    postList.innerHTML = pagedPosts.map(post => createPostTemplate(post)).join('');
-    pageList.innerHTML = createPageTemplate(state.currentPage, totalPage);
-  } else {
-    postList.innerHTML = `<p>게시글이 없습니다.</p>`;
-  }
+  postList.innerHTML = pagedPosts.length > 0 ? pagedPosts.map(post => createPostTemplate(post)).join('') : `<p>게시글이 없습니다.</p>`;
+  pageList.innerHTML = processedPosts.length > 0 ? createPageTemplate(state.currentPage, totalPage) : '';
 };
 
 // 게시글 템플릿

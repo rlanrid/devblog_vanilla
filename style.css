@@ -6,13 +6,13 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #111111;
-  --header-color: #FAFAFA;
+  --header-bg: #FAFAFA;
 }
 
 body.dark {
   --bg-color: #151515;
   --text-color: #eeeeee;
-  --header-color: #121212;
+  --header-bg: #121212;
 }
 
 /* 초기화 */
@@ -208,7 +208,7 @@ body.dark {
 /* 헤더 */
 .header {
   height: 250px;
-  background-color: var(--header-color);
+  background-color: var(--header-bg);
 }
 
 .header__inner {
