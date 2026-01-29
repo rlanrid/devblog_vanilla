@@ -5,14 +5,16 @@
 /* 설정 */
 :root {
   --bg-color: #ffffff;
-  --text-color: #111111;
+  --text-color: #000000;
+  --text-color2: #6f6f6f;
   --header-bg: #FAFAFA;
 }
 
 body.dark {
-  --bg-color: #151515;
+  --bg-color: #1c1c1c;
   --text-color: #eeeeee;
-  --header-bg: #121212;
+  --text-color2: #a1a1a1;
+  --header-bg: #191919;
 }
 
 /* 초기화 */
@@ -39,10 +41,13 @@ img {
 }
 
 button,
-input {
+input,
+textarea,
+select {
   background-color: transparent;
   border: none;
   outline: none;
+  font-family: inherit;
 }
 
 button {
@@ -59,10 +64,6 @@ body {
 body.is-locked {
   overflow: hidden;
   touch-action: none;
-}
-
-body.dark {
-  background-color: #111;
 }
 
 /* 유틸리티 */
@@ -325,7 +326,7 @@ body.dark {
 }
 
 .post__filtering button {
-  color: #5c5c5c;
+  color: var(--text-color2);
   font-size: 12px;
 }
 
@@ -422,14 +423,15 @@ body.dark {
   gap: 8px;
 }
 
-.post__tag-item {
+.post__tag-item button {
   display: block;
+  color: var(--text-color);
   background-color: #8383837a;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 4px;
 }
 
-.post__tag-item:hover {
+.post__tag-item button:hover {
   background-color: #5959597a;
 }
 
@@ -447,7 +449,7 @@ body.dark {
 .pagination a {
   display: block;
   padding: 8px 12px;
-  color: #333;
+  color: var(--text-color);
   border-radius: 4px;
 }
 

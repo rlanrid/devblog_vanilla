@@ -333,6 +333,12 @@ function initStateFromURL(state) {
   state.activeTag = urlState.activeTag;
   state.activeSort = urlState.activeSort;
   state.searchKeyword = urlState.searchKeyword;
+
+  const searchInput = document.getElementById("header__input");
+
+  if (searchInput) {
+    searchInput.value = urlState.searchKeyword
+  }
 };
 
 function updateURL(partial) {
@@ -489,7 +495,7 @@ function createPostTemplate(post) {
   const article = document.createElement('article');
   article.className = 'post__item';
 
-  const postTags = post.tag.map(tag => `<li class="post__tag-item"><a href="/">#${tag}</a></li>`).join('');
+  const postTags = post.tag.map(tag => `<li class="post__tag-item"><button data-tag="${tag}">#${tag}</button></li>`).join('');
 
   return `
     <article class="post__item">
@@ -542,9 +548,18 @@ const tagButtons = document.querySelectorAll(".sidebar__tag-item button");
 
 tagButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    updateURL({ tag: btn.dataset.tag, page: 1 });
+    updateURL({ tag: btn.dataset.tag, keyword: "", page: 1 });
     syncFromURL(state);
   });
+});
+
+postList.addEventListener("click", (e) => {
+  const btn = e.target.closest(".post__tag-list button");
+
+  if (btn) {
+    updateURL({ tag: btn.dataset.tag, keyword: "", page: 1 });
+    syncFromURL(state);
+  }
 });
 
 // 정렬 이벤트
