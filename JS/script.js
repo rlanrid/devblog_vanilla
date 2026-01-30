@@ -294,11 +294,11 @@ function syncThemeUI(theme) {
   if (theme === 'dark') {
     body.classList.add('dark');
     toggleBtn.textContent = '☀️';
-    toggleBtn.setAttribute('aria-label', 'Switch to light mode');
+    toggleBtn.setAttribute('aria-label', '라이트 모드로 전환');
   } else {
     body.classList.remove('dark');
     toggleBtn.textContent = '🌙';
-    toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+    toggleBtn.setAttribute('aria-label', '다크 모드로 전환');
   }
 };
 
@@ -387,9 +387,13 @@ hamburger.addEventListener("click", () => {
 });
 
 function syncMenuUI() {
-  hamburger.classList.toggle("is-open", state.isMenuOpen);
-  sidebar.classList.toggle("is-open", state.isMenuOpen);
-  overlay.classList.toggle("is-open", state.isMenuOpen);
+  const isOpen = state.isMenuOpen;
+
+  hamburger.classList.toggle("is-open", isOpen);
+  sidebar.classList.toggle("is-open", isOpen);
+  overlay.classList.toggle("is-open", isOpen);
+
+  hamburger.setAttribute("aria-expanded", isOpen);
 
   state.isMenuOpen ? lockScroll() : unlockScroll();
 };
@@ -466,14 +470,18 @@ function paginate(posts, currentPage, pageSize) {
 
 function goPrevPage() {
   if (state.currentPage <= 1) return;
-  state.currentPage--;
+
+  updateURL({ page: state.currentPage - 1 });
+  syncFromURL();
+  // state.currentPage--;
 };
 
 function goNextPage() {
   const totalPage = Math.ceil(getDataProcessing(state).length / state.pageSize);
 
   if (state.currentPage >= totalPage) return;
-  state.currentPage++;
+  updateURL({ page: state.currentPage + 1 });
+  syncFromURL();
 };
 
 // 렌더링
@@ -549,7 +557,7 @@ const tagButtons = document.querySelectorAll(".sidebar__tag-item button");
 tagButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     updateURL({ tag: btn.dataset.tag, keyword: "", page: 1 });
-    syncFromURL(state);
+    syncFromURL();
   });
 });
 
@@ -558,7 +566,7 @@ postList.addEventListener("click", (e) => {
 
   if (btn) {
     updateURL({ tag: btn.dataset.tag, keyword: "", page: 1 });
-    syncFromURL(state);
+    syncFromURL();
   }
 });
 
@@ -573,7 +581,7 @@ postFilterContainer.addEventListener("click", (e) => {
   }
 
   updateURL({ sort: e.target.dataset.sort, page: 1 });
-  syncFromURL(state);
+  syncFromURL();
 });
 
 // 검색 이벤트
@@ -582,7 +590,7 @@ const searchButton = document.querySelector(".header__button");
 
 searchInput.addEventListener("input", (e) => {
   updateURL({ keyword: e.target.value.trim(), page: 1 });
-  syncFromURL(state);
+  syncFromURL();
 });
 
 searchButton.addEventListener("click", (e) => {
@@ -615,7 +623,8 @@ pageList.addEventListener("click", (e) => {
 
   // 페이지
   if (!isNaN(page)) {
-    state.currentPage = page;
+    updateURL({ page: page });
+    syncFromURL();
   }
 
   renderPosts(state);

@@ -47,14 +47,19 @@
         </ul>
       </header>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="주 메뉴">
         <ul class="menu">
           <li class="menu__item"><a href="/">Home</a></li>
           <li class="menu__item"><a href="/">My Posts</a></li>
           <li class="menu__item"><a href="/">Setting</a></li>
         </ul>
-        <!-- <a href="" class="btn">Post</a> -->
+      </nav>
+      <!-- nav -->
 
+      <!-- todo: post write -->
+
+      <section class="sidebar__tags" aria-labelledby="sidebar__tags-head">
+        <h2 id="sidebar__tags-head" class="sr-only">태그 목록</h2>
         <ul class="sidebar__tag-list">
           <li class="sidebar__tag-item"><button data-tag="html">#HTML5</button></li>
           <li class="sidebar__tag-item"><button data-tag="css">#CSS</button></li>
@@ -64,17 +69,18 @@
           <li class="sidebar__tag-item"><button data-tag="jqeury">#Jquery</button></li>
           <li class="sidebar__tag-item"><button data-tag="cs">#CS</button></li>
         </ul>
-      </nav>
+      </section>
+      <!-- sidebar tags -->
     </div>
   </aside>
-  <!-- 사이드바 -->
+  <!-- sidebar -->
 
   <div class="wrap">
     <div class="overlay"></div>
 
     <header class="header">
       <div class="header__inner">
-        <button class="hamburger" aria-label="메뉴">
+        <button class="hamburger" aria-label="메뉴" aria-expanded="false">
           <span></span>
         </button>
         <div class="header__intro">
@@ -96,7 +102,7 @@
         </form>
       </div>
     </header>
-    <!-- 헤더 -->
+    <!-- header -->
 
     <main class="main">
       <div class="post__inner">
@@ -105,159 +111,34 @@
           <button type="button" data-sort="views" aria-pressed="false">조회순</button>
         </div>
         <div class="post__list">
-          <!-- <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다.
-                <div class="post__tags">
-                  <ul class="post__tag-list">
-                    <li class="post__tag-item"><a href="/">#JS</a></li>
-                    <li class="post__tag-item"><a href="/">#SASS</a></li>
-                    <li class="post__tag-item"><a href="/">#React</a></li>
-                    <li class="post__tag-item"><a href="/">#Vue</a></li>
-                  </ul>
-                </div>
-              </div>
-          </article> -->
-          <!-- <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습
-              </div>
-            </div>
-          </article>
-          <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습
-              </div>
-            </div>
-          </article>
-          <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습
-              </div>
-            </div>
-          </article>
-          <article class="post__item">
-            <div class="post__thumbnail">
-              <img src="/img/JS.png" alt="게시글 썸네일">
-            </div>
-            <div class="post__content">
-              <h2 class="post__title">
-                <a href="/">JavaScript: 기초</a>
-              </h2>
-              <div class="post__info">
-                <span>2개월 전</span>
-                <span class="dot"></span>
-                <span>30 조회수</span>
-                <span class="dot"></span>
-                <span>5 댓글</span>
-              </div>
-              <div class="post__summary">
-                JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초 공부를 시작하겠습니다. JavaScript 기초
-                공부를
-                시작하겠습
-              </div>
-            </div>
-          </article> -->
+          <!-- post items -->
         </div>
       </div>
-      <!-- 포스트 목록 -->
+      <!-- post list -->
 
       <nav class="pagination">
 
       </nav>
-      <!-- 페이지네이션 -->
+      <!-- pagination -->
     </main>
-    <!-- 메인 -->
+    <!-- main -->
 
-    <!-- 푸터 -->
+
     <footer class="footer">
       <div class="footer__content">
         <p>이 사이트의 디자인은 Dribble을 참고하여 만들었습니다.</p>
         <p>© 2024 DevBlog. All rights reserved. | Built with Passion</p>
       </div>
     </footer>
+    <!-- footer -->
   </div>
-  <!-- 랩 -->
+  <!-- wrap -->
 
-  <button id="theme__toggle" class="theme__toggle-btn" aria-label="Switch to dark mode">🌙</button>
-  <!-- 테마 토글 -->
+  <button id="theme__toggle" class="theme__toggle-btn" aria-label="다크모드로 전환">🌙</button>
+  <!-- theme toggle -->
+
+  <script src="/JS/script.js" defer></script>
+  <!-- script -->
 </body>
-
-<script src="/JS/script.js"></script>
 
 </html>
