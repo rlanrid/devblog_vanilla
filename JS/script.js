@@ -366,14 +366,14 @@ function syncFromURL() {
 
 // 상태
 let state = {
-  posts: posts,
-  activeTag: '',
-  activeSort: 'latest',
-  searchKeyword: '',
-  isMenuOpen: false,
-  currentPage: 1,
-  pageSize: 5,
-  theme: '',
+  posts: posts, // data
+  activeTag: '', // filter
+  activeSort: 'latest', // filter
+  searchKeyword: '', // filter
+  currentPage: 1, // pagination
+  pageSize: 5, // pagination
+  isMenuOpen: false, // UI
+  theme: '', // UI
 };
 
 // 햄버거 메뉴
@@ -500,9 +500,6 @@ function renderPosts(state) {
 
 // 게시글 템플릿
 function createPostTemplate(post) {
-  const article = document.createElement('article');
-  article.className = 'post__item';
-
   const postTags = post.tag.map(tag => `<li class="post__tag-item"><button data-tag="${tag}">#${tag}</button></li>`).join('');
 
   return `
@@ -596,11 +593,10 @@ searchInput.addEventListener("input", (e) => {
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (state.searchKeyword !== "") {
-    state.currentPage = 1;
-    renderPosts(state);
-  } else {
-    alert("검색어를 입력해주세요.");
+  if (!searchInput.value.trim()) {
+    alert("검색어를 입력해주세요!");
+    searchInput.focus();
+    return;
   }
 });
 
